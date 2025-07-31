@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monogamy - Client Onboarding Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://app.monogamy.digital/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Animated doodles -->
+            <div class="doodle doodle-1">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 5C25 10 30 15 35 20C30 25 25 30 20 35C15 30 10 25 5 20C10 15 15 10 20 5Z" stroke="#6EE7FF" stroke-width="2" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="doodle doodle-2">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <circle cx="15" cy="15" r="10" stroke="#14B8A6" stroke-width="2" fill="none" opacity="0.4"/>
+                    <circle cx="15" cy="15" r="5" stroke="#14B8A6" stroke-width="1" fill="none" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="doodle doodle-3">
+                <svg width="35" height="35" viewBox="0 0 35 35" fill="none">
+                    <path d="M5 17.5C10 12.5 15 17.5 20 12.5C25 17.5 30 12.5 35 17.5" stroke="#6EE7FF" stroke-width="2" fill="none" opacity="0.5"/>
+                </svg>
+            </div>
+
+            <form id="onboardForm" action="https://formspree.io/f/your-form-id" method="POST">
+                <!-- Hidden inputs for Formspree -->
+                <input type="hidden" name="consultType" id="consultTypeHidden">
+                <input type="hidden" name="firmName" id="firmNameHidden">
+                <input type="hidden" name="contactName" id="contactNameHidden">
+                <input type="hidden" name="email" id="emailHidden">
+                <input type="hidden" name="phone" id="phoneHidden">
+                <input type="hidden" name="sector" id="sectorHidden">
+                <input type="hidden" name="clientCount" id="clientCountHidden">
+                <input type="hidden" name="intakeDesc" id="intakeDescHidden">
+                <input type="hidden" name="services" id="servicesHidden">
+                <input type="hidden" name="painPoint" id="painPointHidden">
+                <input type="hidden" name="timezone" id="timezoneHidden">
+                <input type="hidden" name="date" id="dateHidden">
+                <input type="hidden" name="time" id="timeHidden">
+                <input type="hidden" name="fullJson" id="fullJsonHidden">
+
+                <div class="form-content" id="formContent">
+                    <!-- Step 0: Welcome -->
+                    <div class="step active" id="step-0">
+                        <div class="logo-placeholder" id="logo">
+                            <div class="logo-text">MONOGAMY</div>
+                            <div class="logo-subtitle">Digital</div>
+                        </div>
+                        <h1>Welcome to Your Digital Transformation Journey</h1>
+                        <p>Let's discover how AI-powered automation can revolutionize your law firm's operations, reduce costs, and boost productivity.</p>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-primary" id="getStartedBtn">Get Started</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Consultation Type -->
+                    <div class="step hidden" id="step-1">
+                        <h2>Choose Your Consultation Type</h2>
+                        <p>Select the option that best fits your needs:</p>
+                        <div class="consultation-options">
+                            <div class="consultation-option" data-value="paid">
+                                <input type="radio" name="consultationTypeRadio" value="paid" id="paid-consult">
+                                <label for="paid-consult">
+                                    <div class="option-header">
+                                        <span class="option-title">1-Hour Strategic Consultation</span>
+                                        <span class="price-chip recommended">$250</span>
+                                    </div>
+                                    <p class="option-desc">Deep dive analysis of your operations with actionable recommendations</p>
+                                    <span class="recommended-badge">Recommended</span>
+                                </label>
+                            </div>
+                            <div class="consultation-option" data-value="free">
+                                <input type="radio" name="consultationTypeRadio" value="free" id="free-intro">
+                                <label for="free-intro">
+                                    <div class="option-header">
+                                        <span class="option-title">15-Minute Introduction Call</span>
+                                        <span class="price-chip free">Free</span>
+                                    </div>
+                                    <p class="option-desc">Quick overview of our services and how we can help</p>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn1">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn1" disabled>Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Firm Basics -->
+                    <div class="step hidden" id="step-2">
+                        <h2>Tell Us About Your Firm</h2>
+                        <p>Let's start with the basics:</p>
+                        <div class="form-group">
+                            <label for="firmName">Law Firm Name *</label>
+                            <input type="text" id="firmName" name="firmNameInput" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Your Name *</label>
+                            <input type="text" id="contactName" name="contactNameInput" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Work Email *</label>
+                            <input type="email" id="email" name="emailInput" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phoneInput" class="form-control" required>
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn2">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn2" disabled>Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Operations -->
+                    <div class="step hidden" id="step-3">
+                        <h2>Your Firm's Operations</h2>
+                        <p>Help us understand how your firm operates:</p>
+                        <div class="form-group">
+                            <label for="sector">Legal Sector *</label>
+                            <select id="sector" name="sectorInput" class="form-control" required>
+                                <option value="">Select your primary sector</option>
+                                <option value="corporate">Corporate Law</option>
+                                <option value="litigation">Litigation</option>
+                                <option value="ip">Intellectual Property</option>
+                                <option value="family">Family Law</option>
+                                <option value="criminal">Criminal Law</option>
+                                <option value="tax">Tax Law</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientCount">Number of Active Clients *</label>
+                            <select id="clientCount" name="clientCountInput" class="form-control" required>
+                                <option value="">Select client count</option>
+                                <option value="<10">Less than 10</option>
+                                <option value="10-50">10 - 50</option>
+                                <option value="51-200">51 - 200</option>
+                                <option value="200+">200+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="intakeDesc">Current Client Intake & Workflow Process</label>
+                            <textarea id="intakeDesc" name="intakeDescInput" class="form-control" rows="4" placeholder="Describe how your firm currently handles client intake and case workflow..."></textarea>
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn3">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn3" disabled>Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Pain Points & Services -->
+                    <div class="step hidden" id="step-4">
+                        <h2>Areas of Interest</h2>
+                        <p>Which of our services interest you most?</p>
+                        <div class="services-grid" id="servicesGrid">
+                            <!-- Services will be populated by JavaScript -->
+                        </div>
+                        <div class="form-group">
+                            <label for="painPoint">What's your biggest operational pain point?</label>
+                            <textarea id="painPoint" name="painPointInput" class="form-control" rows="3" placeholder="Tell us about your biggest challenge..."></textarea>
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn4">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn4">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Schedule -->
+                    <div class="step hidden" id="step-5">
+                        <h2>Schedule Your Consultation</h2>
+                        <p>Choose a date and time that works for you:</p>
+                        <div class="form-group">
+                            <label for="timezoneSelect">Your Timezone</label>
+                            <select id="timezoneSelect" class="form-control">
+                                <option value="Africa/Johannesburg">South Africa (SAST)</option>
+                                <option value="America/New_York">US Eastern (EST/EDT)</option>
+                                <option value="America/Chicago">US Central (CST/CDT)</option>
+                                <option value="America/Denver">US Mountain (MST/MDT)</option>
+                                <option value="America/Los_Angeles">US Pacific (PST/PDT)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="datePicker">Preferred Date *</label>
+                            <input type="text" id="datePicker" class="form-control" placeholder="Select a date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="timePicker">Preferred Time *</label>
+                            <input type="text" id="timePicker" class="form-control" placeholder="Select a time" required>
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn5">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn5" disabled>Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Review -->
+                    <div class="step hidden" id="step-6">
+                        <h2>Review Your Information</h2>
+                        <p>Please review your details before submitting:</p>
+                        <div class="review-section" id="reviewContent">
+                            <!-- Review content will be populated by JavaScript -->
+                        </div>
+                        <div class="step-actions">
+                            <button type="button" class="btn btn-secondary" id="backBtn6">Back</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span class="btn-text">Submit Application</span>
+                                <span class="btn-spinner hidden">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="31.416" stroke-dashoffset="31.416">
+                                            <animate attributeName="stroke-dasharray" dur="2s" values="0 31.416;15.708 15.708;0 31.416" repeatCount="indefinite"/>
+                                            <animate attributeName="stroke-dashoffset" dur="2s" values="0;-15.708;-31.416" repeatCount="indefinite"/>
+                                        </circle>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Success -->
+                    <div class="step hidden" id="step-7">
+                        <div class="success-content">
+                            <div class="success-icon">
+                                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="#14B8A6" stroke-width="2"/>
+                                    <path d="m9 12 2 2 4-4" stroke="#14B8A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h2>Thank You!</h2>
+                            <p id="successMessage">Please check your email for further instructions.</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <footer class="form-footer">
+                <p>&copy; 2025 Monogamy Digital</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Zapier Integration Placeholders -->
+    <script id="zapierPlaceholders" type="application/json">
+    {
+        "paid": {
+            "trigger": "Formspree submission with consultType=paid",
+            "actions": [
+                "Send Stripe payment link email to client",
+                "Create Zoom meeting for 1-hour consultation",
+                "Email meeting link and prep questionnaire to client",
+                "Send notification to Monogamy team with client details"
+            ]
+        },
+        "free": {
+            "trigger": "Formspree submission with consultType=free", 
+            "actions": [
+                "Create Google Calendar event for 15-minute intro call",
+                "Send confirmation email with calendar invite to client",
+                "Send notification to Monogamy team with client details"
+            ]
+        }
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://app.monogamy.digital/app.js"></script>
+</body>
+</html>
